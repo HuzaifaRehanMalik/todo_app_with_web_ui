@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git fetch --all --prune)",
+      "Bash(bash .specify/scripts/bash/create-new-feature.sh \"create an todo app with the best ui and backend for my project using next.js, tailwind, typescript and backend with fastapi,  SQLModel, Neon DB this aap should look like a come complete with features to add remove delete and write complete or in complete task it should also be able to create a .txt filr of todos if needed and should give .txt file name of the date that .txt file is crezted on\" --number=1 --short-name=todo-app)",
+      "Bash(git rev-parse --git-dir)",
+      "Bash(.specify/scripts/powershell/check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks)",
+      "Bash(uv --version)",
+      "Bash(uv add asyncpg)",
+      "Bash(uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000)",
+      "Bash(curl -X POST \"http://localhost:8000/api/todos/\" -H \"Content-Type: application/json\" -d \"{\"\"title\"\":\"\"Test Todo\"\",\"\"description\"\":\"\"This is a test todo item\"\"}\")",
+      "Bash(timeout 5 ping -n 1 127.0.0.)",
+      "Bash(uv add pysqlite3-binary)",
+      "Bash(python test_db.py)",
+      "Bash(uv run python test_db.py)",
+      "Bash(uv run python test_db2.py)",
+      "Bash(curl -X GET \"http://localhost:8000/api/todos/\")",
+      "Bash(curl -X PUT \"http://localhost:8000/api/todos/1\" -H \"Content-Type: application/json\" -d \"{\"\"title\"\":\"\"Updated Todo\"\",\"\"description\"\":\"\"This is an updated todo item\"\"}\")",
+      "Bash(curl -X PATCH \"http://localhost:8000/api/todos/1/complete\" -H \"Content-Type: application/json\")",
+      "Bash(curl -X GET \"http://localhost:8000/api/todos/export/txt\")",
+      "Bash(node --version)",
+      "Bash(npm --version)",
+      "Bash(npx create-next-app@latest todo-frontend --typescript --tailwind --eslint --app --src-dir)",
+      "Bash(npx create-next-app@latest todo-frontend --typescript --tailwind --eslint --app --src-dir --no-import-alias --no-react-compiler)",
+      "Bash(dir /s /b ../frontend/todo-frontend/src/app)",
+      "Bash(cat ../frontend/todo-frontend/src/app/page.tsx)",
+      "Bash(npm run dev)",
+      "Bash(npm install)"
+    ]
+  }
+}

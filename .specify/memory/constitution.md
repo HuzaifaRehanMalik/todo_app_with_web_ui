@@ -1,55 +1,45 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+SYNC IMPACT REPORT:
+Version change: 1.0.0 → 1.0.0 (initial creation)
+Modified principles: None (new constitution)
+Added sections: All sections (initial creation)
+Removed sections: None
+Templates requiring updates: ⚠ pending - .specify/templates/plan-template.md, .specify/templates/spec-template.md, .specify/templates/tasks-template.md
+Follow-up TODOs: None
+-->
+
+# Todo App Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Full-Stack Development with Next.js and FastAPI
+The application follows a modern full-stack architecture with Next.js for frontend and FastAPI for backend. Frontend must be built with TypeScript and Tailwind CSS for consistent styling. Backend must use FastAPI with SQLModel ORM and Neon Serverless PostgreSQL for data persistence.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Feature-First Implementation
+Every feature must be implemented with both frontend and backend components simultaneously. All features must be testable in isolation and integration. Each feature must have proper error handling and validation on both ends.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Test-First (NON-NEGOTIABLE)
+TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced. All API endpoints must have unit tests. All UI components must have integration tests.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Type Safety and Validation
+All data contracts must be strongly typed with TypeScript interfaces. Backend must validate all inputs before processing. Frontend must validate user inputs before sending to backend. SQLModel models must match database schema exactly.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Task Management Core Features
+The application must support: Adding tasks with title and description, Listing all tasks with status indicators, Updating task details, Deleting tasks by ID, Marking tasks as complete/incomplete, Importing tasks from .txt files named by date.
 
-### [PRINCIPLE_6_NAME]
+### VI. Data Persistence and Migration
+Database schema changes must follow proper migration patterns. Data integrity must be maintained during all operations. Backup and recovery procedures must be considered in implementation.
 
+## Technology Stack Requirements
+Frontend: Next.js 14+, TypeScript 5+, Tailwind CSS 3+
+Backend: FastAPI 0.104+, Python 3.11+, SQLModel 0.0.8+
+Database: Neon Serverless PostgreSQL
+Development: Node.js 18+, npm/yarn, Python virtual environments
 
-[PRINCIPLE__DESCRIPTION]
-
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
-
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Development Workflow
+All code changes must pass linting and type checking before merging. API endpoints must be documented with OpenAPI/Swagger. Frontend components must be responsive and accessible. Code reviews required for all pull requests. Automated tests must pass before deployment.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+This constitution supersedes all other development practices. All pull requests and code reviews must verify compliance with these principles. Complexity must be justified with clear benefits. Use this constitution for development guidance and decision-making.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
-
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-01-05 | **Last Amended**: 2026-01-05
