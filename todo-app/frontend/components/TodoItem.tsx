@@ -94,7 +94,7 @@ export default function TodoItem({ todo, onUpdate, onDelete, onError }: TodoItem
     <div className={`group relative border-2 rounded-xl p-5 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-md hover:shadow-xl transition-all duration-300 ${
       todo.completed 
         ? 'border-green-200 dark:border-green-800/50 bg-green-50/50 dark:bg-green-900/10' 
-        : 'border-gray-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-700'
+        : 'border-gray-200 dark:border-slate-700 hover:border-blue-200 dark:hover:border-blue-500'
     }`}>
       {isEditing ? (
         <div className="space-y-4 animate-fade-in">
@@ -102,14 +102,14 @@ export default function TodoItem({ todo, onUpdate, onDelete, onError }: TodoItem
             type="text"
             value={editTitle}
             onChange={(e) => setEditTitle(e.target.value)}
-            className="w-full px-4 py-3 border-2 border-blue-300 dark:border-blue-600 rounded-xl bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            className="w-full px-4 py-3 border-2 border-blue-200 dark:border-blue-400 rounded-xl bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
             disabled={isLoading}
             autoFocus
           />
           <textarea
             value={editDescription}
             onChange={(e) => setEditDescription(e.target.value)}
-            className="w-full px-4 py-3 border-2 border-blue-300 dark:border-blue-600 rounded-xl bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none"
+            className="w-full px-4 py-3 border-2 border-blue-200 dark:border-blue-400 rounded-xl bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all resize-none"
             rows={3}
             disabled={isLoading}
           />
@@ -117,7 +117,7 @@ export default function TodoItem({ todo, onUpdate, onDelete, onError }: TodoItem
             <button
               onClick={handleSaveEdit}
               disabled={isLoading || !editTitle.trim()}
-              className="flex-1 px-4 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:shadow-lg hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
+              className="flex-1 px-4 py-2.5 bg-gradient-to-r from-green-400 to-emerald-400 text-white font-semibold rounded-xl hover:shadow-lg hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
             >
               {isLoading ? (
                 <>
@@ -140,7 +140,7 @@ export default function TodoItem({ todo, onUpdate, onDelete, onError }: TodoItem
                 setEditDescription(todo.description || "");
               }}
               disabled={isLoading}
-              className="px-6 py-2.5 bg-gray-200 dark:bg-slate-700 text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:bg-gray-300 dark:hover:bg-slate-600 active:scale-95 transition-all duration-200"
+              className="px-6 py-2.5 bg-gray-200 dark:bg-slate-700 text-gray-500 dark:text-gray-300 font-semibold rounded-xl hover:bg-gray-300 dark:hover:bg-slate-600 active:scale-95 transition-all duration-200"
             >
               Cancel
             </button>
@@ -160,8 +160,8 @@ export default function TodoItem({ todo, onUpdate, onDelete, onError }: TodoItem
               />
               <div className={`relative w-6 h-6 rounded-lg border-2 transition-all duration-200 ${
                 todo.completed
-                  ? 'bg-gradient-to-br from-green-500 to-emerald-600 border-green-500'
-                  : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-700 hover:border-blue-500'
+                  ? 'bg-gradient-to-br from-green-400 to-emerald-400 border-green-400'
+                  : 'border-gray-200 dark:border-gray-500 bg-white dark:bg-slate-700 hover:border-blue-400'
               }`}>
                 {todo.completed && (
                   <svg className="absolute inset-0 w-full h-full text-white p-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -185,7 +185,7 @@ export default function TodoItem({ todo, onUpdate, onDelete, onError }: TodoItem
               <p className={`text-sm mb-3 transition-all ${
                 todo.completed 
                   ? "line-through text-gray-400 dark:text-gray-500" 
-                  : "text-gray-600 dark:text-gray-300"
+                  : "text-gray-400 dark:text-gray-300"
               }`}>
                 {todo.description}
               </p>
@@ -215,7 +215,7 @@ export default function TodoItem({ todo, onUpdate, onDelete, onError }: TodoItem
               <button
                 onClick={handleMarkIncomplete}
                 disabled={isLoading}
-                className="px-4 py-2 bg-gradient-to-r from-orange-500 to-amber-600 text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:scale-105 active:scale-95 disabled:opacity-50 transition-all duration-200 flex items-center gap-2"
+                className="px-4 py-2 bg-gradient-to-r from-orange-400 to-amber-400 text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:scale-105 active:scale-95 disabled:opacity-50 transition-all duration-200 flex items-center gap-2"
                 title="Mark as Incomplete"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -227,7 +227,7 @@ export default function TodoItem({ todo, onUpdate, onDelete, onError }: TodoItem
               <button
                 onClick={handleMarkComplete}
                 disabled={isLoading}
-                className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:scale-105 active:scale-95 disabled:opacity-50 transition-all duration-200 flex items-center gap-2"
+                className="px-4 py-2 bg-gradient-to-r from-green-400 to-emerald-400 text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:scale-105 active:scale-95 disabled:opacity-50 transition-all duration-200 flex items-center gap-2"
                 title="Mark as Complete"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -242,7 +242,7 @@ export default function TodoItem({ todo, onUpdate, onDelete, onError }: TodoItem
               <button
                 onClick={() => setIsEditing(true)}
                 disabled={isLoading}
-                className="p-2.5 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-all duration-200 hover:scale-110 active:scale-95 disabled:opacity-50"
+                className="p-2.5 text-blue-400 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-all duration-200 hover:scale-110 active:scale-95 disabled:opacity-50"
                 title="Edit"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -252,11 +252,11 @@ export default function TodoItem({ todo, onUpdate, onDelete, onError }: TodoItem
               <button
                 onClick={handleDelete}
                 disabled={isLoading}
-                className="p-2.5 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-all duration-200 hover:scale-110 active:scale-95 disabled:opacity-50"
+                className="p-2.5 text-red-400 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-all duration-200 hover:scale-110 active:scale-95 disabled:opacity-50"
                 title="Delete"
               >
                 {isLoading ? (
-                  <div className="w-5 h-5 border-2 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+                  <div className="w-5 h-5 border-2 border-red-400 border-t-transparent rounded-full animate-spin"></div>
                 ) : (
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
