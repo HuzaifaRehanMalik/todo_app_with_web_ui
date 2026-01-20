@@ -29,7 +29,7 @@ export default function HomePage() {
             Organize your day, focus on what matters, and get more done.
           </p>
           <p className="text-lg text-gray-400 dark:text-gray-400 max-w-xl mx-auto">
-          A powerful todo app that transforms daily plans into action, helping you stay organized, focused, and productive throughout the day.
+            A powerful todo app that transforms daily plans into action, helping you stay organized, focused, and productive throughout the day.
           </p>
         </section>
 
@@ -93,6 +93,23 @@ export default function HomePage() {
             </svg>
             <span>Sign In</span>
           </Link>
+        </section>
+
+        {/* API Embed */}
+        <section className="mt-16 w-full animate-fade-in">
+          <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl shadow-lg border border-white/20 dark:border-slate-700/50 p-4 overflow-hidden">
+            <h3 className="text-lg font-semibold mb-4 text-center text-gray-900 dark:text-white">Backend Status & Docs</h3>
+            <div className="flex justify-center w-full overflow-auto">
+              <iframe
+                src={process.env.NEXT_PUBLIC_API_URL || "https://huzaifa035-backend.hf.space"}
+                width="850"
+                height="450"
+                style={{ border: 0 }}
+                className="max-w-full rounded-lg"
+                title="Backend API"
+              ></iframe>
+            </div>
+          </div>
         </section>
 
         {/* Footer Note */}

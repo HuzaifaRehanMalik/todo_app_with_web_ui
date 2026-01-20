@@ -3,17 +3,17 @@
 import { Todo, TodoCreate, TodoUpdate } from "@/types/todo";
 import { tokenStorage } from "./authService";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api/v1";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // Generic API call function
 async function apiCall<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const token = tokenStorage.getToken();
-  
-  const headers: HeadersInit = {
+
+  const headers: Record<string, string> = {
     "Content-Type": "application/json",
-    ...options.headers,
+    ...(options.headers as Record<string, string>),
   };
-  
+
   // Add authorization header if token exists
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;

@@ -2,7 +2,7 @@
 
 import { UserLogin, UserCreate, AuthResponse, UserPublic } from "@/types/user";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api/v1";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // Generic API call function
 async function apiCall<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
@@ -55,33 +55,33 @@ export const tokenStorage = {
     if (typeof window === "undefined") return null;
     return localStorage.getItem("access_token");
   },
-  
+
   setToken: (token: string): void => {
     if (typeof window === "undefined") return;
     localStorage.setItem("access_token", token);
   },
-  
+
   removeToken: (): void => {
     if (typeof window === "undefined") return;
     localStorage.removeItem("access_token");
   },
-  
+
   getUser: (): UserPublic | null => {
     if (typeof window === "undefined") return null;
     const userStr = localStorage.getItem("user");
     return userStr ? JSON.parse(userStr) : null;
   },
-  
+
   setUser: (user: UserPublic): void => {
     if (typeof window === "undefined") return;
     localStorage.setItem("user", JSON.stringify(user));
   },
-  
+
   removeUser: (): void => {
     if (typeof window === "undefined") return;
     localStorage.removeItem("user");
   },
-  
+
   clear: (): void => {
     if (typeof window === "undefined") return;
     localStorage.removeItem("access_token");
