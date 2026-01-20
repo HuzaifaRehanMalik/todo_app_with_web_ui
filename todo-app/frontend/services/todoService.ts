@@ -3,7 +3,7 @@
 import { Todo, TodoCreate, TodoUpdate } from "@/types/todo";
 import { tokenStorage } from "./authService";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://huzaifa035-backend.hf.space";
 
 // Generic API call function
 async function apiCall<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
@@ -19,22 +19,47 @@ async function apiCall<T>(endpoint: string, options: RequestInit = {}): Promise<
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-    headers,
-    ...options,
-  });
+  const url = `${API_BASE_URL}${endpoint}`;
+  try {
+    const response = await fetch(url, {
+      headers,
+      ...options,
+    });
 
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.detail || `API call failed: ${response.status} ${response.statusText}`);
+    // Handle 204 No Content responses
+    if (response.status === 204) {
+      return null as T;
+    }
+
+    // Handle non-JSON responses (prevents "Unexpected token <" error)
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || `API call failed: ${response.status} ${response.statusText}`);
+      }
+      return response.json();
+    } else {
+      // If response is not JSON (e.g., HTML error page)
+      const text = await response.text();
+      // Only log if it's an error status or we expected data
+      if (!response.ok) {
+        console.error(`API Error (${url}): Expected JSON but got ${contentType}`, text.substring(0, 200));
+        throw new Error(`API Error: Received invalid response from server. Status: ${response.status} ${response.statusText}`);
+      }
+      // If status is OK but not JSON, and not 204, it might be a text response?
+      // For now, assume if it's not JSON it's unexpected for this API.
+      console.error(`API Unexpected Format (${url}): Expected JSON but got ${contentType}`);
+      throw new Error(`API Error: Received invalid response format from server.`);
+    }
+  } catch (error) {
+    if (error instanceof TypeError && error.message.includes("fetch")) {
+      throw new Error(
+        `Failed to connect to the server. Please check your internet connection and make sure the backend is reachable.`
+      );
+    }
+    throw error;
   }
-
-  // Handle 204 No Content responses
-  if (response.status === 204) {
-    return null as T;
-  }
-
-  return response.json();
 }
 
 // Create a new todo

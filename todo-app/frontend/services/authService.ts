@@ -2,12 +2,13 @@
 
 import { UserLogin, UserCreate, AuthResponse, UserPublic } from "@/types/user";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://huzaifa035-backend.hf.space";
 
 // Generic API call function
 async function apiCall<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+  const url = `${API_BASE_URL}${endpoint}`;
   try {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    const response = await fetch(url, {
       headers: {
         "Content-Type": "application/json",
         ...options.headers,
@@ -15,17 +16,25 @@ async function apiCall<T>(endpoint: string, options: RequestInit = {}): Promise<
       ...options,
     });
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.detail || `API call failed: ${response.status} ${response.statusText}`);
+    // Handle non-JSON responses (prevents "Unexpected token <" error)
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || `API call failed: ${response.status} ${response.statusText}`);
+      }
+      return response.json();
+    } else {
+      // If response is not JSON (e.g., HTML error page)
+      const text = await response.text();
+      console.error(`API Error (${url}): Expected JSON but got ${contentType}`, text.substring(0, 200));
+      throw new Error(`API Error: Received invalid response from server. Status: ${response.status} ${response.statusText}`);
     }
-
-    return response.json();
   } catch (error) {
     // Handle network errors (backend not running, CORS, etc.)
     if (error instanceof TypeError && error.message.includes("fetch")) {
       throw new Error(
-        `Failed to connect to the server. Please make sure the backend is running at ${API_BASE_URL}`
+        `Failed to connect to the server. Please check your internet connection and make sure the backend is reachable.`
       );
     }
     // Re-throw other errors
